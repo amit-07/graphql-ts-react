@@ -1,0 +1,17 @@
+.countries{
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    grid-auto-rows: auto;
+    padding:50px 100px;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.languages{
+    padding: 0 30px;
+}
+
+.filterS{
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,14 @@
+.continents{
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    grid-auto-rows: auto;
+    /* grid-template-columns: 2fr auto; */
+    padding:30px;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.title{
+    padding: 20px;
+    text-align: center;
+}

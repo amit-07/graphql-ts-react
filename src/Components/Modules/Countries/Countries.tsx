@@ -14,6 +14,7 @@ import FilterCheckboxes from '../../ReusableComponents/FilterCheckboxes';
 
 import "./Countries.css";
 import { filterByLanguages } from '../../../Utils/Filters';
+import Typography from '@mui/material/Typography';
 
 
 const Countries = () => {
@@ -57,13 +58,13 @@ const Countries = () => {
         }else{
             setFilteredCountries(countryData?.countries);
         }
-    }, [selectedLanguages])
+    }, [selectedLanguages, countryData?.countries])
 
     const handleFilterSelection = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             if(e.target.checked){
                 setSelected((prevState: any) => [...prevState, e.target.name]);
             }else{
-                const updatedLanguages = selectedLanguages.filter((language: string) => language != e.target.name);
+                const updatedLanguages = selectedLanguages.filter((language: string) => language !== e.target.name);
                 setSelected(updatedLanguages);
             }
     }, [selectedLanguages]);
@@ -88,29 +89,30 @@ const Countries = () => {
                                 />
                             ))}
                         </Item>
-                </Grid>
-                <Grid item xs={12} md={10}>
-                    <Item>
-                        <h3>Nations in {continent.name}</h3>
-                        <div className="countries">
-                            {filteredCountries?.map((country: Country, idx: number) => (
-                            <Link
-                                to="/details"
-                                state={{ name: country.name, 
-                                    languages: country.languages,  
-                                    phone: country.phone,
-                                    continent: country.continent.name,
-                                    capital: country.capital,
-                                    currency: country.currency
-                                }}
-                            >
-                                <TileComponent data={country} key={idx} />
-                            </Link>
-                            ))}
-                        </div> 
-                    </Item>
-                    
-                </Grid>
+                    </Grid>
+                    <Grid item xs={12} md={10}>
+                        {filteredCountries.length > 0 ?<Item>
+                            <h3>Nations in {continent.name}</h3>
+                            <div className="countries">
+                                {filteredCountries?.map((country: Country, idx: number) => (
+                                <Link
+                                    to="/details"
+                                    state={{ name: country.name, 
+                                        languages: country.languages,  
+                                        phone: country.phone,
+                                        continent: country.continent.name,
+                                        capital: country.capital,
+                                        currency: country.currency
+                                    }}
+                                >
+                                    <TileComponent data={country} key={idx} />
+                                </Link>
+                                ))}
+                            </div> 
+                        </Item> :
+                        <Typography className="no-results" variant="h4" component="h4">No Results to show</Typography>
+                        }                        
+                    </Grid>
             </Grid>
         </Box>
     )
